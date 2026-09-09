@@ -22,6 +22,10 @@ public class PipeMiddleScript : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        logic.addScore();
+        if (collision.gameObject.layer == 3)  // Check if the collided object is on the "Player" layer
+        {
+            logic.addScore(1);
+        }
+            
     }
 }
