@@ -5,7 +5,7 @@ using UnityEngine;
 public class PipeMiddleScript : MonoBehaviour
 {
     public LogicScript logic;
-    public Animator ScoreTextAnim;
+
 
     // Start is called before the first frame update
     void Start()
