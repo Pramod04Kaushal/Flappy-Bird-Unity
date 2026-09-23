@@ -12,18 +12,30 @@ public class LogicScript : MonoBehaviour
     public GameObject gameOverScreen;
     public GameObject startScreen;
 
+    private bool restartingGame = false;
+
+    public Animator ScoreTextAnim;
+
     private void Start()
     {
-        Time.timeScale = 0;               //Pause the game at the start
+        if (restartingGame)
+        {
+            restartGame();
+        }
+        else
+        {
+            // This is the first time opening the game
+            Time.timeScale = 0f;
+        }
     }
 
     [ContextMenu("Add Score")]
     public void addScore(int scoreToAdd)
     {
         playerScore = playerScore + scoreToAdd;
+        ScoreTextAnim.Play("TextUpdate");
         scoreText.text = playerScore.ToString();
     }
-
 
 
     public void playGame()
@@ -35,11 +47,22 @@ public class LogicScript : MonoBehaviour
      
     public void restartGame()
     {
+
+
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+
+        restartingGame = true;
+        Time.timeScale = 1f;
+
+        startScreen.SetActive(false);
+        gameObject.SetActive(false);
+
     }
 
     public void gameOver()
     {
         gameOverScreen.SetActive(true);
+
+
     }
 }
